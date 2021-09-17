@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./to-do-list-style.css">
+    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+    <title>To-do-list</title>
+</head>
+<body>
+    <div id="head">
+        <div class="h1">
+
+        </div>
+        <div class="h2">
+            <h1>TO DO LIST <img src="https://img.icons8.com/wired/64/000000/checklist.png" style="margin-bottom:-12px"/></h1>
+        </div>
+        <div class="h3">
+
+        </div>
+    </div>
+    <div id="bottom">
+        <div class="b1">
+            <div style="text-align: center;">
+                <h2 >AKSHAT'S TO DO LIST</h2>
+            </div>
+            <div class="to-do-list" style="margin-top: 3%;">
+                    <input type="text" placeholder="Things to do...." id="inp">
+                    <button type="submit" id="add">Add <i class="fas fa-plus" style="margin-left: 10px;"></i></button>
+                    <!-- <button type="submit" style="background-color: red;" >Clear All<i class="fas fa-times" style="margin-left: 10px;"></i></button> -->
+                    <ul id="list" style=" list-style-type:none; margin-left: 10px; padding: 0; margin-top: 5vh;">
+                            <li >Click on Add to Add element to lists</hli>
+                            <li class="checked">Have fun!!!</li>
+                    </ul>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                            <button type="submit" id="clearAll" class="show_hide" style="background-color: crimson; margin-top: 20px ; width: 25%;">Clear All <i class="fas fa-times" style="margin-left: 10px;"></i></button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+    <script src="https://kit.fontawesome.com/2f424775eb.js" crossorigin="anonymous"></script>
+</body>
+</html>

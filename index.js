@@ -5,8 +5,11 @@ const port = 8000;
 
 const app = express();
 const db=require('./config/mongoose');
+const task = require('./models/taskschema');
+
+
 app.use(express.static(path.join(__dirname,'views')));
-app.use(express.static(path.join(__dirname,'CSS')));
+app.use(expre ss.static(path.join(__dirname,'CSS')));
 app.use(express.static(path.join(__dirname,'script')));
 
 app.get('/',function(req,res){

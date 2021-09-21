@@ -26,16 +26,14 @@
                 <h2 >AKSHAT'S TO DO LIST</h2>
             </div>
             <div class="to-do-list" style="margin-top: 3%;">
-                    <input type="text" placeholder="Things to do...." id="inp">
-                    <button type="submit" id="add">Add <i class="fas fa-plus" style="margin-left: 10px;"></i></button>
-                    <!-- <button type="submit" style="background-color: red;" >Clear All<i class="fas fa-times" style="margin-left: 10px;"></i></button> -->
-                    <ul id="list" style=" list-style-type:none; margin-left: 10px; padding: 0; margin-top: 5vh;">
-                            <li >Click on Add to Add element to lists</hli>
-                            <li class="checked">Have fun!!!</li>
-                    </ul>
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                            <button type="submit" id="clearAll" class="show_hide" style="background-color: crimson; margin-top: 20px ; width: 25%;">Clear All <i class="fas fa-times" style="margin-left: 10px;"></i></button>
-                    </div>
+                <form action="/add-task" method="POST">
+                        <input type="text" placeholder="Things to do...." id="inp" name="inpitem">
+                        <button type="submit" id="add">Add <i class="fas fa-plus" style="margin-left: 10px;"></i></button>
+                        <ul id="list" style=" list-style-type:none; margin-left: 10px; padding: 0; margin-top: 5vh;">
+                                <li >Click on Add to Add element to lists</hli>
+                                <li class="checked">Have fun!!!</li>
+                        </ul>
+                </form>
             </div>
         </div>
     </div>

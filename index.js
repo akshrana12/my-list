@@ -56,6 +56,15 @@ app.post('/add-task',function(req,res){
     });
 });
 
+app.post('/apisend',function(req,res){
+    console.log(req.body.use);
+    task.findOneAndDelete({'mytask':req.body.use}, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    return;
+});
 
 app.listen(port, function(err){
     if(err)

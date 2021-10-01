@@ -5,7 +5,6 @@ function addListItem(data1){
           var inptext=x;
           var t = document.createTextNode(inptext);
           li.appendChild(t);
-          console.log(li);
           if (inptext === '') {
           alert("You must write something!");
           } else {
@@ -44,7 +43,25 @@ complist.addEventListener('click',function(event){
      }
      else if(event.target.tagName=="SPAN")
      {
+          var str=event.target.parentElement.innerText;
           event.target.parentElement.remove();
+          var x="";
+          for(let i=0;i<=str.length-3;i++)
+          {
+               if(str[i]=='\\')
+                    break;
+               x+=str[i];
+          }
+          const data={
+               'use': x
+          };
+          fetch('/apisend', {
+               method: 'POST', 
+               headers: {
+                              'Content-Type': 'application/json',
+                         },
+               body: JSON.stringify(data),
+          });
      }
 },false);
 

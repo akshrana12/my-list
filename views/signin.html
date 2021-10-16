@@ -23,12 +23,12 @@
         <div class="b1">
             <div class="b1_1">
                 <h2 class="small-head">SIGN-IN</h2>
-                <form class="sign-in">
+                <form class="sign-in" action="/sign-in" method="POST">
                     <label class="form-element"><b>Email</b></label>
-                    <input class="input-box" type="email" placeholder="Email" required>
+                    <input class="input-box" type="email" placeholder="Email" name="email" required>
                     <label class="form-elemen"><b>Password</b></label>
-                    <input class="input-box" type="password"  placeholder="Password" required>
-                    <button class="button">Sign In</button>
+                    <input class="input-box" type="password"  name="password" placeholder="Password" required>
+                    <button class="button" type="submit">Sign In</button>
                     <p style="text-align: center;">Not a Member?<a href="signup.html"> Sign Up</a></p>
                 </form>
             </div>

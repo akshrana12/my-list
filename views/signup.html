@@ -22,16 +22,16 @@
     <div id="bottom">
         <div class="b1">
             <h2 class="small-head">SIGN-UP</h2>
-            <form class="sign-in">
-                <label class="form-element"><b>Name</b></label>
-                <input class="input-box" type="text" placeholder="Name" required>
+            <form class="sign-in" action="sign-up-db" method="POST">
+                <label class="form-element" ><b>Name</b></label>
+                <input class="input-box" type="text" placeholder="Name" name="name" required>
                 <label class="form-element"><b>Email</b></label>
-                <input class="input-box" type="email" placeholder="Email" required>
+                <input class="input-box" type="email" placeholder="Email" name="email" required>
                 <label class="form-elemen"><b>Password</b></label>
-                <input class="input-box" type="password"  placeholder="Password" required>
+                <input class="input-box" type="password"  placeholder="Password" name="password" required>
                 <label class="form-elemen"><b>Confirm Password</b></label>
-                <input class="input-box" type="password"  placeholder="Confirm Password" required>
-                <button class="button">Sign Up</button>
+                <input class="input-box" type="password"  placeholder="Confirm Password" name="confirm-password" required>
+                <button class="button" type="submit">Sign Up</button>
                 <p style="text-align: center;">Already a member?<a href="index.html"> Sign In</a></p>
             </form>
         </div>

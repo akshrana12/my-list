@@ -2,6 +2,8 @@ function addListItem(data1){
      data1.forEach(function (arrayItem) {
           var x = arrayItem["mytask"];
           var li=document.createElement("LI");
+          li.setAttribute("id", arrayItem["_id"]);
+          li.setAttribute("class", arrayItem["class"]);
           var inptext=x;
           var t = document.createTextNode(inptext);
           li.appendChild(t);
@@ -39,19 +41,28 @@ var complist=document.getElementById("list");
 complist.addEventListener('click',function(event){
      if(event.target.tagName=="LI")
      {
+          var sendData="unchecked";
+          if(event.target.className==="unchecked"){
+               sendData="checked";
+          }
+          const data={
+                    'use': sendData,
+                    'id': event.target.id
+               };
+          fetch('/apiToggle', {
+                    method: 'POST', 
+                    headers: {
+                                   'Content-Type': 'application/json',
+                              },
+                    body: JSON.stringify(data),
+          });
           event.target.classList.toggle('checked');
      }
      else if(event.target.tagName=="SPAN")
      {
-          var str=event.target.parentElement.innerText;
+          var str=event.target.parentElement.id;
           event.target.parentElement.remove();
-          var x="";
-          for(let i=0;i<=str.length-3;i++)
-          {
-               if(str[i]=='\\')
-                    break;
-               x+=str[i];
-          }
+          var x=str;
           const data={
                'use': x
           };

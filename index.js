@@ -3,6 +3,10 @@ const path=require('path');
 const port = 8000;
 
 const app = express();
+
+app.set('view engine','ejs');
+app.set('views','./views');
+
 const db=require('./config/mongoose');
 const task = require('./models/taskschema');
 const user= require('./models/user');
@@ -11,8 +15,9 @@ const user= require('./models/user');
 const session = require('express-session');
 const passport = require('passport');
 const passportlocal=require('./config/passport-local');
+const MongoStore=require('connect-mongo');
 
-app.use(express.static(path.join(__dirname,'views')));
+
 app.use(express.static(path.join(__dirname,'CSS')));
 app.use(express.static(path.join(__dirname,'script')));
 app.use(express.urlencoded({ extended: true }));
@@ -28,20 +33,23 @@ app.use(session({
     resave: false,
     cookie:{
         maxAge:(1000*60*100)
+    },
+    store:MongoStore.create({
+        mongoUrl:'mongodb://localhost:27017/my-list-mongodb'
     }
+    )
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(passport.setAuthenticatedUser);
 
 app.post('/sign-in',passport.authenticate(
     'local',
-    {failureRedirect:__dirname+'\\views\\to-do-list.html'}
+    {failureRedirect:'/'}
 ),function(req,res){
-    console.log('hello\n');
-    str=__dirname+'\\views\\to-do-list.html';
-    return res.redirect(str);
+    return res.redirect('/todolist');
 });
 
 app.post('/sign-up-db',function(req,res){
@@ -60,23 +68,33 @@ app.post('/sign-up-db',function(req,res){
 });
 
 app.get('/',function(req,res){
-    str=__dirname+'\\views\\signin.html';
-    return res.sendFile(str);
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/todolist');
+    }
+    return res.render('signin');
 });
 
-app.get('/todolist',function(req,res){
-    str=__dirname+'\\views\\to-do-list.html';
-    return res.sendFile(str);
+app.get('/todolist',passport.checkAuthentication,function(req,res){
+    return res.render('to-do-list');
 });
 
 app.get('/signup',function(req,res){
-    str=__dirname+'\\views\\signup.html';
-    return res.sendFile(str);
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/todolist');
+    }
+    return res.render('signup');
+});
+
+app.get('/logout',function(req,res){
+    req.logout();
+    return res.redirect('/');
 });
 
 app.get('/getbackenddata',function(req,res){
     var sendData;
-    task.find({}, function(err, allData) {
+    task.find({email:req.user.email}, function(err, allData) {
         if (err) {
             console.log(err);
         } else {
@@ -89,6 +107,8 @@ app.get('/getbackenddata',function(req,res){
 app.post('/add-task',function(req,res){
     task.create({
         mytask : req.body.inpitem,
+        email: req.user.email,
+        class: "unchecked"
     },function(err,newTask){
         if(err){
             console.log('Error in creating task!!!');
@@ -101,14 +121,20 @@ app.post('/add-task',function(req,res){
 
 app.post('/apisend',function(req,res){
     console.log(req.body.use);
-    task.findOneAndDelete({'mytask':req.body.use}, function(err) {
+    task.findOneAndDelete({'_id':req.body.use}, function(err) {
         if (err) {
             console.log(err);
         }
     });
     return;
 });
-
+app.post('/apiToggle',function(req,res){
+    task.findByIdAndUpdate(req.body.id, { 'class': req.body.use },function (err, docs) {
+        if (err){
+            console.log(err)
+        }
+    });
+});
 app.listen(port, function(err){
     if(err)
     {

@@ -8,6 +8,14 @@ const taskSchema = new mongoose.Schema({
     date:{
         type:Date,
         default:Date.now
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    class:{
+        type:String,
+        required:true
     }
 });
 

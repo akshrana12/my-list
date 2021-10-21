@@ -8,7 +8,7 @@ function addListItem(data1){
           var t = document.createTextNode(inptext);
           li.appendChild(t);
           if (inptext === '') {
-          alert("You must write something!");
+               window.alert("You must write something!");
           } else {
           document.getElementById("list").appendChild(li);
           }

@@ -63,7 +63,7 @@ app.post('/sign-up-db',function(req,res){
             return;
         }
         console.log("******",User);
-        return res.redirect('back');
+        return res.redirect('/');
     });
 });
 
@@ -112,7 +112,7 @@ app.post('/add-task',function(req,res){
     },function(err,newTask){
         if(err){
             console.log('Error in creating task!!!');
-            return;
+            return res.redirect('/todolist');
         }
         console.log("******",newTask);
         return res.redirect('back');
